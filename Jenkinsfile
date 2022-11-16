@@ -25,7 +25,7 @@ pipeline {
                                     sourceFiles: 'dist/trainSchedule.zip',
                                     removePrefix: 'dist/',
                                     remoteDirectory: '/tmp',
-                                    execCommand: 'sudo /usr/bin/systemctl stop train-schedule && rm -rf /opt/train-schedule/* && unzip /tmp/trainSchedule.zip -d /opt/train-schedule && sudo /usr/bin/systemctl start train-schedule'
+                                    execCommand: 'if systemctl --all --type service | grep -q "train-schedule";then sudo /usr/bin/systemctl stop train-schedule else echo "does NOT exist." fi && sudo rm -rf /opt/train-schedule/* && sudo unzip /tmp/trainSchedule.zip -d /opt/train-schedule && sudo /usr/bin/systemctl start train-schedule'
                                 )
                             ]
                         )
@@ -52,7 +52,7 @@ pipeline {
                                     sourceFiles: 'dist/trainSchedule.zip',
                                     removePrefix: 'dist/',
                                     remoteDirectory: '/tmp',
-                                    execCommand: 'sudo /usr/bin/systemctl stop train-schedule && rm -rf /opt/train-schedule/* && unzip /tmp/trainSchedule.zip -d /opt/train-schedule && sudo /usr/bin/systemctl start train-schedule'
+                                    execCommand: 'if systemctl --all --type service | grep -q "train-schedule";then sudo /usr/bin/systemctl stop train-schedule else echo "does NOT exist." fi && sudo rm -rf /opt/train-schedule/* && sudo unzip /tmp/trainSchedule.zip -d /opt/train-schedule && sudo /usr/bin/systemctl start train-schedule'
                                 )
                             ]
                         )
