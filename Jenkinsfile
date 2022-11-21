@@ -14,7 +14,9 @@ pipeline {
                 branch 'master'
             }
             steps {
+                
                 echo 'Copy files'
+                // Copy file to remote server 
                 sshPublisher(
                     failOnError: true,
                     continueOnError: false,
@@ -32,8 +34,23 @@ pipeline {
                     ]
                 )
                 
-                echo 'Running commands'
-                sh 'if systemctl --all --type service | grep -q "train-schedule";then echo "" | sudo -S /usr/bin/systemctl stop train-schedule; fi && echo "" | sudo -S rm -rf /opt/train-schedule/* && echo "" | sudo -S unzip /tmp/trainSchedule.zip -d /opt/train-schedule && echo "" | sudo -S /usr/bin/systemctl start train-schedule'
+                // Execute commands
+                echo 'Execute commands'
+                sshPublisher(
+                    failOnError: true,
+                    continueOnError: false,
+                    publishers: [
+                        sshPublisherDesc(
+                            configName: 'staging',
+                            transfers: [
+                                sshTransfer(
+                                    execCommand: 'if systemctl --all --type service | grep -q "train-schedule";then echo "" | sudo -S /usr/bin/systemctl stop train-schedule; fi && echo "" | sudo -S rm -rf /opt/train-schedule/* && echo "" | sudo -S unzip /tmp/trainSchedule.zip -d /opt/train-schedule && echo "" | sudo -S /usr/bin/systemctl start train-schedule'
+                                )
+                            ]
+                        )
+                    ]
+                )
+                
             }
         }
         
@@ -44,6 +61,7 @@ pipeline {
             steps {
                 input 'Does the staging environment look OK?'
                 milestone(1)
+                
                 echo 'Copy files'
                 sshPublisher(
                     failOnError: true,
@@ -62,8 +80,23 @@ pipeline {
                     ]
                 )
                 
-                echo 'Running commands'
-                sh 'if systemctl --all --type service | grep -q "train-schedule";then echo "" | sudo -S /usr/bin/systemctl stop train-schedule; fi && echo "" | sudo -S rm -rf /opt/train-schedule/* && echo "" | sudo -S unzip /tmp/trainSchedule.zip -d /opt/train-schedule && echo "" | sudo -S /usr/bin/systemctl start train-schedule'
+                // Execute commands
+                echo 'Execute commands'
+                sshPublisher(
+                    failOnError: true,
+                    continueOnError: false,
+                    publishers: [
+                        sshPublisherDesc(
+                            configName: 'staging',
+                            transfers: [
+                                sshTransfer(
+                                    execCommand: 'if systemctl --all --type service | grep -q "train-schedule";then echo "" | sudo -S /usr/bin/systemctl stop train-schedule; fi && echo "" | sudo -S rm -rf /opt/train-schedule/* && echo "" | sudo -S unzip /tmp/trainSchedule.zip -d /opt/train-schedule && echo "" | sudo -S /usr/bin/systemctl start train-schedule'
+                                )
+                            ]
+                        )
+                    ]
+                )
+                
             }
         }
         
