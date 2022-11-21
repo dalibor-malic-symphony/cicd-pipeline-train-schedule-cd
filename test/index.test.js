@@ -4,15 +4,17 @@ var express = require('express');
 var app = require('../app');
  
 describe('Index Page', function() {
-  it("renders successfully", async function(done) {
+  it("renders successfully", function(done) {
+    this.timeout(10000);
     request(app).get('/').expect(200, done);
-    await delay(1000);
-  }).timeout(10000);
+    done();
+  })
 })
 
 describe('Trains API', function() {
-  it("returns data successfully", async function(done) {
+  it("returns data successfully", function(done) {
+    this.timeout(10000);
     request(app).get('/trains').expect(200).expect('Content-Length', '1093').expect('Content-Type', /json/, done);
-    await delay(1000);
+    done();
   })
-}).timeout(10000);
+})
