@@ -33,7 +33,7 @@ pipeline {
                 )
                 
                 echo 'Running commands'
-                sh 'if systemctl --all --type service | grep -q "train-schedule";then echo '' | sudo -S /usr/bin/systemctl stop train-schedule; fi && echo '' | sudo -S rm -rf /opt/train-schedule/* && echo '' | sudo -S unzip /tmp/trainSchedule.zip -d /opt/train-schedule && echo '' | sudo -S /usr/bin/systemctl start train-schedule'
+                sh 'if systemctl --all --type service | grep -q "train-schedule";then echo "" | sudo -S /usr/bin/systemctl stop train-schedule; fi && echo "" | sudo -S rm -rf /opt/train-schedule/* && echo "" | sudo -S unzip /tmp/trainSchedule.zip -d /opt/train-schedule && echo "" | sudo -S /usr/bin/systemctl start train-schedule'
             }
         }
         
@@ -63,7 +63,7 @@ pipeline {
                 )
                 
                 echo 'Running commands'
-                sh 'if systemctl --all --type service | grep -q "train-schedule";then echo '' | sudo -S /usr/bin/systemctl stop train-schedule; fi && echo '' | sudo -S rm -rf /opt/train-schedule/* && echo '' | sudo -S unzip /tmp/trainSchedule.zip -d /opt/train-schedule && echo '' | sudo -S /usr/bin/systemctl start train-schedule'
+                sh 'if systemctl --all --type service | grep -q "train-schedule";then echo "" | sudo -S /usr/bin/systemctl stop train-schedule; fi && echo "" | sudo -S rm -rf /opt/train-schedule/* && echo "" | sudo -S unzip /tmp/trainSchedule.zip -d /opt/train-schedule && echo "" | sudo -S /usr/bin/systemctl start train-schedule'
             }
         }
         
